@@ -34,7 +34,10 @@ end
 
 @wheel = Wheel.new(26, 1.5)
 puts @wheel.circumference
+#-> 91.106186954104
 
 puts Gear.new(52, 11, @wheel).gear_inches
+#-> 137.0909090909091
 
 puts Gear.new(52, 11).ratio
+#-> 4.7272727272727275
