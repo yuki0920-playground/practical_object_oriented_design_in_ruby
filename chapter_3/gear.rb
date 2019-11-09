@@ -1,9 +1,10 @@
 class Gear
-  attr_reader :chainring, :cog, :wheel
-  def initialize(chainring, cog, wheel)
+  attr_reader :chainring, :cog, :rim, :tire
+  def initialize(chainring, cog, rim, tire)
     @chainring = chainring
     @cog = cog
-    @wheel = wheel
+    @rim = rim
+    @tire = tire
   end
 
   def gear_inches
