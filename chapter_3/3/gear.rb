@@ -17,7 +17,9 @@ module GearWrapper
   end
 end
 
+
 # 引数を持つハッシュを渡すことでGearのインスタンスを作成できるようになった
+
 Gear.Wrapper.gear(
   :chainring => 52,
   :cog => 11,
