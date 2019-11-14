@@ -1,18 +1,31 @@
 class Trip
   attr_reader :bicycles, :customers, :vehicle
 
-  # この'mechanic'引数はどんなクラスのものでも良い
-  def prepare(mechanic)
-    mechanic.prepare_bicycles(bicycles)
+  def prepare(preparers)
+    case preparer
+    when Mechanic
+      prepare.parepare_bicycles(bicycles)
+    when TripCoodinator
+      pareparer.buy_food(customers)
+    when Driver
+      prepare.gas_up(vehicle)
+      preparer.fill_water_tank(vehicle)
+    end
   end
 end
 
-class Mechanic
-  def prepare_bicycles(bicycles)
-    bycles.each{ |bicycle| prepare_bicycle(bicycle) }
+class TripCordinator
+  def buy_food(customers)
+    #
+  end
+end
+
+class Driver
+  def gas_up(vehicle)
+    #
   end
 
-  def prepare_bicycles(bicycle)
+  def fill_water_tank(vehicle)
     #
   end
 end
