@@ -2,30 +2,27 @@ class Trip
   attr_reader :bicycles, :customers, :vehicle
 
   def prepare(preparers)
-    case preparer
-    when Mechanic
-      prepare.parepare_bicycles(bicycles)
-    when TripCoodinator
-      pareparer.buy_food(customers)
-    when Driver
-      prepare.gas_up(vehicle)
-      preparer.fill_water_tank(vehicle)
-    end
+    preparers.each{|preparer| preparer.prepare_trip(self)}
+  end
+end
+
+class Mechanic
+  def prepare_trip(trip)
+    trip.bicycles.each{ |bicycle|
+      prepare_bicycle(bicycle)}
   end
 end
 
 class TripCordinator
-  def buy_food(customers)
-    #
+  def prepare_trip(trip)
+    buy_food(trip.customers)
   end
 end
 
 class Driver
-  def gas_up(vehicle)
-    #
-  end
-
-  def fill_water_tank(vehicle)
-    #
+  def prepare_trip(trip)
+    vehicle = trip.vehicle
+    gas_up(vehicle)
+    fill_water_tank(vehicle)
   end
 end
