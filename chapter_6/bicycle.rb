@@ -1,13 +1,17 @@
 class Bicycle
+  attr_accessor :size
 
+  def initialize(args={})
+    @size = args[:size]
+  end
 end
 
 class RoadBike < Bicycle
-  attr_accessor :size, :tape_color
+  attr_accessor :tape_color
 
   def initialize(args)
-    @size = args[:size]
     @tape_color = args[:tape_color]
+    super(args)
   end
 
   # 全ての自転車は、デフォルト値として同じタイヤサイズとチェーンサイズを持つ
@@ -24,6 +28,7 @@ class MouintainBike < Bicycle
   def initialize(args)
     @front_shock = args[:front_shock]
     @rear_shock = args[:rear_shock]
+    super(args)
   end
 
   def spares
@@ -46,4 +51,4 @@ mountain_bike = MouintainBike.new(
 )
 
 mountain_bike.size
-# -> "NoMethodError: undefined method `size'"
+# -> "S"
