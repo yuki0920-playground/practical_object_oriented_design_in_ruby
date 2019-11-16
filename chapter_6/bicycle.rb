@@ -3,8 +3,12 @@ class Bicycle
 
   def initialize(args={})
     @size = args[:size]
-    @chain = args[:chain]
-    @tire_size = args[:tire_size]
+    @chain = args[:chain] || default_chain
+    @tire_size = args[:tire_size] || default_tire_size
+  end
+
+  def default_chain
+    '10-speed'
   end
 end
 
@@ -14,6 +18,10 @@ class RoadBike < Bicycle
   def initialize(args)
     @tape_color = args[:tape_color]
     super(args)
+  end
+
+  def default_tire_size
+    '23'
   end
 
   # 全ての自転車は、デフォルト値として同じタイヤサイズとチェーンサイズを持つ
@@ -33,6 +41,10 @@ class MouintainBike < Bicycle
     super(args)
   end
 
+  def default_tire_size
+    '2.1'
+  end
+
   def spares
     super.merge(rear_shock: rear_shock)
   end
@@ -45,6 +57,8 @@ road_bike = RoadBike.new(
 
 road_bike.size
 # -> "M"
+road_bike.tire_size
+# -> "23"
 
 mountain_bike = MouintainBike.new(
   size: 'S',
@@ -54,3 +68,5 @@ mountain_bike = MouintainBike.new(
 
 mountain_bike.size
 # -> "S"
+mountain_bike.tire_size
+# -> "2.1"
