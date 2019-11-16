@@ -50,6 +50,12 @@ class MouintainBike < Bicycle
   end
 end
 
+class RecumbentBike < Bicycle
+  def default_chain
+    '9-speed'
+  end
+end
+
 road_bike = RoadBike.new(
   size: 'M',
   tape_color: 'red',
@@ -70,3 +76,7 @@ mountain_bike.size
 # -> "S"
 mountain_bike.tire_size
 # -> "2.1"
+
+bent = RecumbentBike.new
+# -> 'NameError undefined local variable or method'
+# -> 'default_tire_size'
