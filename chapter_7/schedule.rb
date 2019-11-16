@@ -1,7 +1,7 @@
 class Schedule
   def scheduled?(schedulable, start_date, end_date)
     puts "This #{schedulable.class}" +
-      "is not scheduled\n" +
+      " is not scheduled\n" +
       "between #{start_date} and #{end_date}"
     false
   end
@@ -42,9 +42,37 @@ class Bicycle
   end
 end
 
+class Vehicle
+  include Schedulable
+
+  def lead_days
+    3
+  end
+end
+
+class Mechanic
+  include Schedulable
+
+  def lead_days
+    4
+  end
+end
+
 require 'date'
 starting = Date.parse("2015/09/04")
 ending = Date.parse("2015/09/10")
 
 b = Bicycle.new
 b.schedulable?(starting, ending)
+# This Bicycleis not scheduled
+# between 2015-09-03 and 2015-09-10
+
+v = Vehicle.new
+v.schedulable?(starting, ending)
+# This Vehicleis not scheduled
+# between 2015-09-01 and 2015-09-10
+
+m = Mechanic.new
+m.schedulable?(starting, ending)
+# This Mechanicis not scheduled
+# between 2015-08-31 and 2015-09-10
