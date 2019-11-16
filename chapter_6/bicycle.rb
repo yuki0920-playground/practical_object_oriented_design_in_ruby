@@ -14,13 +14,28 @@ class Bicycle
   # 他にもメソッドたくさん
 end
 
-bike = Bicycle.new(
-  size: 'M',
-  tape_color: 'red'
+class MouintainBike < Bicycle
+  attr_reader :front_shock, :rear_shock
+
+  def initialize(args)
+    @front_shock = args[:front_shock]
+    @rear_shock = args[:rear_shock]
+    super(args)
+  end
+
+  def spares
+    super.merge(rear_shock: rear_shock)
+  end
+end
+
+mountain_bike = MouintainBike.new(
+  size: 'S',
+  front_shock: 'Manitou',
+  rear_shock: 'Fox',
 )
 
-bike.size #-> 'M'
-bike.spares
-# -> {:tire_size => "23",
-#     :chain => "10-speed",
-#     :tape_color => "red"}
+mountain_bike.size
+# -> "S"
+
+mountain_bike.spares
+# -> {:chain=>"10-speed", :tire_size=>"23", :tape_color=>nil, :rear_shock=>"Fox"}
