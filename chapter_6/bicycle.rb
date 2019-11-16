@@ -5,7 +5,11 @@ class Bicycle
     @size = args[:size]
     @chain = args[:chain] || default_chain
     @tire_size = args[:tire_size] || default_tire_size
-    post_initialize(args)
+    post_initialize(args) # Bicycleでは送信と
+  end
+
+  def post_initialize(args) # 実装の両方を行う
+    nil
   end
 
   def default_chain
@@ -21,6 +25,7 @@ class Bicycle
     {tire_size: tire_size, chain: chain}.merge(local_spares)
   end
 
+  # サブクラスがオーバーライドするためのフック
   def local_spares
     {}
   end
