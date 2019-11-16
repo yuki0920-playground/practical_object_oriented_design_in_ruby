@@ -1,32 +1,26 @@
 class Bicycle
-  attr_accessor :style, :size, :tape_color, :front_shock, :rear_shock
+  attr_accessor :size, :tape_color
 
   def initialize(args)
-    @style = args[:style]
     @size = args[:size]
     @tape_color = args[:tape_color]
-    @front_shock = args[:front_shock]
-    @rear_shock = args[:rear_shock]
   end
 
   # 全ての自転車は、デフォルト値として同じタイヤサイズとチェーンサイズを持つ
   def spares
-    if style == :road
-      {chain: '10-speed', tire_size: '23', tape_color: tape_color}
-    else
-      {chain: '10-speed', tire_size: '2.1', rear_shock: rear_shock}
-    end
+    {chain: '10-speed', tire_size: '23', tape_color: tape_color}
   end
 
   # 他にもメソッドたくさん
 end
 
 bike = Bicycle.new(
-  style: :mountain,
-  size: 'S',
-  front_shock: 'Manitou',
-  rear_shock: 'Fox',
+  size: 'M',
+  tape_color: 'red'
 )
 
+bike.size #-> 'M'
 bike.spares
-# -> {:chain=>"10-speed", :tire_size=>"2.1", :rear_shock=>"Fox"}
+# -> {:tire_size => "23",
+#     :chain => "10-speed",
+#     :tape_color => "red"}
