@@ -1,8 +1,22 @@
+require 'pry'
+
 class Bicycle
-  attr_accessor :size, :chain, :tire_size
+  attr_reader :size, :parts
 
   def initialize(args={})
     @size = args[:size]
+    @parts = args[:parts]
+  end
+
+  def spares
+    parts.spares
+  end
+end
+
+class Parts < Bicycle
+  attr_accessor :chain, :tire_size
+
+  def initialize(args={})
     @chain = args[:chain] || default_chain
     @tire_size = args[:tire_size] || default_tire_size
     post_initialize(args) # Bicycleでは送信と
@@ -31,7 +45,7 @@ class Bicycle
   end
 end
 
-class RoadBike < Bicycle
+class RoadBikeParts < Parts
   attr_accessor :tape_color
 
   def post_initialize(args)
@@ -47,7 +61,7 @@ class RoadBike < Bicycle
   end
 end
 
-class MouintainBike < Bicycle
+class MountainBikeParts < Parts
   attr_reader :front_shock, :rear_shock
 
   def post_initialize(args)
@@ -63,3 +77,21 @@ class MouintainBike < Bicycle
     '2.1'
   end
 end
+
+road_bike = Bicycle.new(
+  size: 'L',
+  parts: RoadBikeParts.new(tape_color: 'red'))
+
+p road_bike.size
+# -> "L"
+p road_bike.spares
+# -> {:tire_size=>"23", :chain=>"10-speed", :tape_color=>"red"}
+
+mountain_bike = Bicycle.new(
+  size: 'L',
+  parts: MountainBikeParts.new(rear_shock: 'Fox'))
+
+p mountain_bike.size
+# -> "L"
+p mountain_bike.spares
+# -> {:tire_size=>"2.1", :chain=>"10-speed", :rear_schock=>"Fox"}
